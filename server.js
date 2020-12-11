@@ -12,7 +12,6 @@ require("dotenv").config();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
-// app.use(express.static("./client"));
 // Declare Passport
 app.use(passport.initialize());
 app.use(passport.session());
