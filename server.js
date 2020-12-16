@@ -17,7 +17,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-
 const userRoutes = require("./routes/user_routes");
 app.use(userRoutes);
 
@@ -30,7 +29,6 @@ if (process.env.NODE_ENV === "production") {
         );
     });
 }
-
 
 db.sequelize.sync().then(() => {
     app.listen(PORT, () => console.log(`listening at http://localhost:${PORT}`));
