@@ -21,7 +21,7 @@ router.post("/register", async (req, res) => {
             lastName,
             idnumber
         } = req.body;
-
+        console.log(req.body);
         // validation
         if (!email || !password || !passwordCheck)
             return res.status(400).json({ msg: "Not all fields have been entered" });
@@ -55,6 +55,7 @@ router.post("/register", async (req, res) => {
         });
         res.json(newUser);
     } catch (err) {
+        console.log("Hello");
         res.status(500).json({ error: err.message });
     }
 });
@@ -134,7 +135,7 @@ router.get("/", auth, async (req, res) => {
 
 router.get("/one/:id", (req, res) => {
     db.User.findOne({
-        where: { id: req.params.id },
+        where: { idnumber: req.params.idnumber },
     })
         .then((user) => res.json(user))
         .catch((err) => res.send(err));

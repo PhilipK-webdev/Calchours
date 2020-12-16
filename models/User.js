@@ -3,22 +3,6 @@ const { Op } = require("sequelize");
 
 module.exports = function (sequelize, DataTypes) {
     const User = sequelize.define("User", {
-        firstname: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        lastname: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        username: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-            validtae: {
-                [Op.iRegexp]: '^[h|a|t]',
-            }
-        },
         email: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -28,6 +12,19 @@ module.exports = function (sequelize, DataTypes) {
             },
         },
         password: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        userName: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true,
+        },
+        firstName: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        lastName: {
             type: DataTypes.STRING,
             allowNull: false,
         },

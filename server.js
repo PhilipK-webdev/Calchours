@@ -16,6 +16,11 @@ app.use(cors());
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Routes
+
+const userRoutes = require("./routes/user_routes");
+app.use(userRoutes);
+
 // Deploy to Heroku
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
