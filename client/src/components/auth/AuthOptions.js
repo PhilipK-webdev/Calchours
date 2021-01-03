@@ -1,28 +1,54 @@
-import React, { useContext } from "react";
-import MyButton from "../button/MyButton";
-// import { useHistory } from "react-router-dom";
-// import UserContext from "../../context/UserContext";
-
+import React, { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
+import UserContext from "../../context/UserContext";
+import Button from 'react-bootstrap/Button'
+import ButtonGroup from "react-bootstrap/ButtonGroup"
 export default function AuthOptions() {
-    // const { userData, setUserData } = useContext(UserContext);
+    const { userData, setUserData } = useContext(UserContext);
+    const [num, setNum] = useState("0");
+    const history = useHistory();
 
-    // const history = useHistory();
+    const register = () => history.push("/register");
+    const login = () => history.push("/login");
+    const logout = () => {
+        setUserData({ token: undefined, user: undefined });
+        localStorage.setItem("auth-token", "");
+        history.push("/")
+    };
 
-    // const register = () => history.push("/register");
-    // const login = () => history.push("/login");
-    // const logout = () => {
-    //     setUserData({ token: undefined, user: undefined });
-    //     localStorage.setItem("auth-token", "");
-    //     history.push("/")
-    // };
-
-
-    // For the future-add true/false variable to send to MyButton , what name to have 
     return (
         <nav className="navbar">
             <div className="container-fluid pt-0">
-                <MyButton />
+                <ButtonGroup>
+                    {userData.user ? (
+                        <Button
+
+
+                            color="primary"
+                            onClick={logout}
+                        >
+                            LOGOUT
+                        </Button>
+                    ) : (
+                            <>
+                                <Button
+
+                                    color="primary"
+                                    onClick={register}
+                                >
+                                    REGISTER
+            </Button>
+                                <Button
+
+                                    color="primary"
+                                    onClick={login}
+                                >
+                                    LOGIN
+            </Button>
+                            </>
+                        )}
+                </ButtonGroup>
             </div>
-        </nav>
+        </nav >
     );
 }
