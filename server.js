@@ -18,7 +18,8 @@ app.use(passport.session());
 
 // Routes
 const userRoutes = require("./routes/user_routes");
-app.use(userRoutes);
+app.use("/users", userRoutes);
+
 
 // Deploy to Heroku
 if (process.env.NODE_ENV === "production") {

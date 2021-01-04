@@ -53,6 +53,7 @@ router.post("/register", async (req, res) => {
             lastName,
             idnumber
         });
+        console.log(newUser);
         res.json(newUser);
     } catch (err) {
         console.log("Hello");

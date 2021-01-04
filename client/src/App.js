@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
+import Axios from "axios";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Nav from "../src/components/nav/Nav"
 import Footer from './components/footer/Footer';
@@ -15,29 +16,29 @@ function App() {
     user: "",
   });
 
-  // useEffect(() => {
-  //   const checkedLoggedIn = async () => {
-  //     let token = localStorage.getItem("auth-token");
-  //     if (token === null) {
-  //       localStorage.setItem("auth-token", "");
-  //       token = "";
-  //     }
+  useEffect(() => {
+    const checkedLoggedIn = async () => {
+      let token = localStorage.getItem("auth-token");
+      if (token === null) {
+        localStorage.setItem("auth-token", "");
+        token = "";
+      }
 
-  //     const tokenRes = await Axios.post(
-  //       "/users/tokenIsValid",
-  //       null,
-  //       { headers: { "x-auth-token": token } }
-  //     );
-  //     if (tokenRes.data) {
-  //       const userRes = await Axios.get("/users/", {
-  //         headers: { "x-auth-token": token },
-  //       });
-  //       setUserData({ token, user: userRes.data });
-  //     }
-  //   };
+      const tokenRes = await Axios.post(
+        "/users/tokenIsValid",
+        null,
+        { headers: { "x-auth-token": token } }
+      );
+      if (tokenRes.data) {
+        const userRes = await Axios.get("/users/", {
+          headers: { "x-auth-token": token },
+        });
+        setUserData({ token, user: userRes.data });
+      }
+    };
 
-  //   checkedLoggedIn();
-  // }, []);
+    checkedLoggedIn();
+  }, []);
 
   return (
     <div className="container-fluid m-0 p-0">
@@ -49,7 +50,7 @@ function App() {
               <LandingPage />
             </Route>
             <Route path="/register">
-              <RegisterPage />
+              <RegisterPage userData={userData} />
             </Route>
             <Route path="/login">
               <LoginPage />

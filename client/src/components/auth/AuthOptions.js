@@ -1,11 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import UserContext from "../../context/UserContext";
 import Button from 'react-bootstrap/Button'
 import ButtonGroup from "react-bootstrap/ButtonGroup"
 export default function AuthOptions() {
     const { userData, setUserData } = useContext(UserContext);
-    const [num, setNum] = useState("0");
     const history = useHistory();
 
     const register = () => history.push("/register");
