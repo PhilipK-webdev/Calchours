@@ -1,10 +1,10 @@
 import React from 'react'
 import Login from '../components/auth/Login'
 
-const LoginPage = () => {
+const LoginPage = (props) => {
     return (
         <div>
-            <Login />
+            <Login userData={props.userData} setUserData={props.setUserData} />
         </div>
     )
 }

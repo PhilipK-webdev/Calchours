@@ -53,10 +53,9 @@ router.post("/register", async (req, res) => {
             lastName,
             idnumber
         });
-        console.log(newUser);
+
         res.json(newUser);
     } catch (err) {
-        console.log("Hello");
         res.status(500).json({ error: err.message });
     }
 });
@@ -64,9 +63,9 @@ router.post("/register", async (req, res) => {
 // login user
 router.post("/login", async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { email, password, idnumber } = req.body;
 
-        if (!email || !password)
+        if (!email || !password || !idnumber)
             return res.status(400).json({ msg: "Not all field have been entered" });
 
         const user = await db.User.findOne({ where: { email: email } });
@@ -75,6 +74,10 @@ router.post("/login", async (req, res) => {
                 .status(400)
                 .json({ msg: "No account with this email has been registered" });
         const isMatch = await bcrypt.compareSync(password, user.password, () => {
+            if (!isMatch)
+                return res.status(400).json({ msg: "Invalid login credentials" });
+        });
+        const isMatchId = await bcrypt.compareSync(idnumber, user.idnumber, () => {
             if (!isMatch)
                 return res.status(400).json({ msg: "Invalid login credentials" });
         });

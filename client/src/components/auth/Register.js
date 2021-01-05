@@ -32,16 +32,16 @@ const Register = (props) => {
             console.log(props.userData);
             const userResponse = await Axios.post("/users/register", newUser);
             console.log(userResponse);
-            // const loginRes = await Axios.post("/users/login", {
-            //     email: userResponse.data.email,
-            //     password: newUser.password,
-            // });
+            const loginRes = await Axios.post("/users/login", {
+                email: userResponse.data.email,
+                password: newUser.password,
+            });
 
-            // console.log("loginres.data:", loginRes.data);
+            console.log("loginres.data:", loginRes.data);
 
-            // setUserData({ token: loginRes.data.token, user: loginRes.data.user });
-            // localStorage.setItem("auth-token", loginRes.data.token);
-            // history.push("/");
+            setUserData({ token: loginRes.data.token, user: loginRes.data.user });
+            localStorage.setItem("auth-token", loginRes.data.token);
+            history.push("/");
         } catch (err) {
             console.log(err);
         }

@@ -53,7 +53,7 @@ function App() {
               <RegisterPage userData={userData} />
             </Route>
             <Route path="/login">
-              <LoginPage />
+              <LoginPage userData={userData} setUserData={setUserData} />
             </Route>
           </Switch>
           <footer data-test="footer" className="page-footer font-small pt-4">
