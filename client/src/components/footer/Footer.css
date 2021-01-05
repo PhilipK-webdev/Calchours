@@ -1,0 +1,7 @@
+.footer{
+
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 10vh !important;
+    background-color: #e3f2fd;
+}

@@ -41,26 +41,28 @@ function App() {
   }, []);
 
   return (
-    <div className="container-fluid m-0 p-0">
-      <Router>
-        <UserContext.Provider value={{ userData, setUserData }}>
-          <Nav />
-          <Switch>
-            <Route exact path="/">
-              <LandingPage />
-            </Route>
-            <Route path="/register">
-              <RegisterPage userData={userData} />
-            </Route>
-            <Route path="/login">
-              <LoginPage userData={userData} setUserData={setUserData} />
-            </Route>
-          </Switch>
-          <footer data-test="footer" className="page-footer font-small pt-4">
-            <Footer />
-          </footer>
-        </UserContext.Provider>
-      </Router>
+    <div className="d-flex flex-column h-100">
+      <div className="row">
+        <Router>
+          <UserContext.Provider value={{ userData, setUserData }}>
+            <Nav />
+            <Switch>
+              <Route exact path="/">
+                <LandingPage />
+              </Route>
+              <Route path="/register">
+                <RegisterPage userData={userData} />
+              </Route>
+              <Route path="/login">
+                <LoginPage userData={userData} setUserData={setUserData} />
+              </Route>
+            </Switch>
+            <footer>
+              <Footer />
+            </footer>
+          </UserContext.Provider>
+        </Router>
+      </div>
     </div >
   );
 }
