@@ -33,7 +33,7 @@ const Login = (props) => {
                 });
 
                 localStorage.setItem("auth-token", loginRes.data.token);
-                history.push("/");
+                history.push("/calendar");
             } else {
                 setStatusBase({
                     msg: "Error - Email && Password\n cannot be empty",

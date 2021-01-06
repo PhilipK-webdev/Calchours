@@ -8,6 +8,7 @@ import RegisterPage from './pages/RegisterPage';
 import LandingPage from './pages/LandingPage';
 import UserContext from "./context/UserContext"
 import LoginPage from "./pages/LoginPage";
+import CalendarPage from "./pages/CalendarPage";
 
 function App() {
 
@@ -55,6 +56,9 @@ function App() {
               </Route>
               <Route path="/login">
                 <LoginPage userData={userData} setUserData={setUserData} />
+              </Route>
+              <Route path="/calendar">
+                <CalendarPage userData={userData} />
               </Route>
             </Switch>
             <footer>

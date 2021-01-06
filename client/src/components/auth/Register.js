@@ -35,13 +35,14 @@ const Register = (props) => {
             const loginRes = await Axios.post("/users/login", {
                 email: userResponse.data.email,
                 password: newUser.password,
+                idnumber: newUser.idnumber,
             });
 
             console.log("loginres.data:", loginRes.data);
 
             setUserData({ token: loginRes.data.token, user: loginRes.data.user });
             localStorage.setItem("auth-token", loginRes.data.token);
-            history.push("/");
+            history.push("/calendar");
         } catch (err) {
             console.log(err);
         }

@@ -44,7 +44,7 @@ router.post("/register", async (req, res) => {
                 .json({ msg: "Account with this email already exists" });
 
         if (!userName) userName = email;
-
+        console.log("Hello");
         let newUser = await db.User.create({
             email,
             password,
@@ -78,7 +78,7 @@ router.post("/login", async (req, res) => {
                 return res.status(400).json({ msg: "Invalid login credentials" });
         });
         const isMatchId = await bcrypt.compareSync(idnumber, user.idnumber, () => {
-            if (!isMatch)
+            if (!isMatchId)
                 return res.status(400).json({ msg: "Invalid login credentials" });
         });
 
