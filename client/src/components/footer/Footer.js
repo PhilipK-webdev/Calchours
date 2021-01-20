@@ -3,7 +3,7 @@ import "../footer/Footer.css"
 const Footer = () => {
 
     return (
-        <div className="fixed-bottom">
+        <div>
             <div className="footer mt-auto py-3 text-center">
                 <div className="row">
                     <div className="container-fluid p-0">
