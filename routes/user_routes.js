@@ -165,7 +165,7 @@ router.post("/usercalendar", (req, res) => {
         month: req.body.month,
         year: req.body.year,
         title: req.body.title,
-        UserId: req.body.UserId,
+        UserIdnumber: req.body.UserIdnumber,
     }).then((resonse) => {
         console.log(resonse)
         res.send("Success")
