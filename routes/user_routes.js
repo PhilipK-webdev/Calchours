@@ -21,7 +21,6 @@ router.post("/register", async (req, res) => {
             lastName,
             idnumber
         } = req.body;
-        console.log(req.body);
         // validation
         if (!email || !password || !passwordCheck)
             return res.status(400).json({ msg: "Not all fields have been entered" });
@@ -44,7 +43,6 @@ router.post("/register", async (req, res) => {
                 .json({ msg: "Account with this email already exists" });
 
         if (!userName) userName = email;
-        console.log("Hello");
         let newUser = await db.User.create({
             email,
             password,
@@ -158,5 +156,20 @@ router.patch("/update", (req, res) => {
         .then(() => res.send("Success!"))
         .catch((err) => res.send(err));
 });
+
+// User Calendar
+
+router.post("/usercalendar", (req, res) => {
+    db.Month.create({
+        day: req.body.day,
+        month: req.body.month,
+        year: req.body.year,
+        title: req.body.title,
+        UserId: req.body.UserId,
+    }).then((resonse) => {
+        console.log(resonse)
+        res.send("Success")
+    }).catch(err => res.send(err));
+})
 
 module.exports = router;

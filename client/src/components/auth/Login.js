@@ -24,9 +24,7 @@ const Login = (props) => {
         try {
             if (email && password && idnumber) {
                 const loginUser = { email, password, idnumber };
-                console.log(loginUser);
                 const loginRes = await Axios.post("/users/login", loginUser);
-                console.log(props.setUserData);
                 props.setUserData({
                     token: loginRes.data.token,
                     user: loginRes.data.user,

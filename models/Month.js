@@ -16,7 +16,8 @@ module.exports = function (sequelize, DataTypes) {
         title: {
             type: DataTypes.STRING,
             allowNull: false,
-        }
+        },
+        UserIdnumber: { type: DataTypes.INTEGER, allowNull: false },
     });
 
     Month.associate = (models) => {

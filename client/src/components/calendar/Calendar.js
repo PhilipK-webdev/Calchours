@@ -6,11 +6,10 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { INITIAL_EVENTS, createEventId } from "./event-utils.js";
 const Calendar = () => {
-    console.log(INITIAL_EVENTS);
-    console.log(createEventId());
     const [weekendsVisible, setWeekendsVisible] = useState(true);
     const [currentEvents, setCurrentEvents] = useState([]);
-    const [MyTitle, setMyTitle] = useState([]);
+    const [myTitle, setMyTitle] = useState([]);
+    const [count, setCount] = useState(0);
     const history = useHistory();
     useEffect(() => {
         const token = localStorage.getItem("auth-token");
@@ -40,10 +39,14 @@ const Calendar = () => {
             </div>
         )
     }
-
+    let title = "";
+    let tempCount = 0;
     const handleDateSelect = (selectInfo) => {
-        let title = prompt('Please enter a new title for your event');
-        setMyTitle(...title);
+        myTitle.push(prompt('Please enter a new title for your event'));
+        console.log(myTitle);
+        tempCount = +1;
+        setCount(tempCount);
+        title = myTitle[count];
         let calendarApi = selectInfo.view.calendar;
         calendarApi.unselect() // clear date selection
         if (title) {
@@ -68,7 +71,6 @@ const Calendar = () => {
     }
 
     function renderEventContent(eventInfo) {
-        console.log(eventInfo.event.title);
         return (
             <>
                 <b>{eventInfo.timeText}</b>
