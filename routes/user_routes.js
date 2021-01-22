@@ -165,11 +165,19 @@ router.post("/usercalendar", (req, res) => {
         month: req.body.month,
         year: req.body.year,
         title: req.body.title,
-        UserIdnumber: req.body.UserIdnumber,
-    }).then((resonse) => {
-        console.log(resonse)
+    }).then(() => {
         res.send("Success")
     }).catch(err => res.send(err));
-})
+});
+
+router.get("/usercalendar/:id", (req, res) => {
+    db.Month.findOne({
+        where: {
+            UserId: req.params.id
+        }
+    }).then(month => res.json(month)).catch(err => res.send(err));
+});
+
+
 
 module.exports = router;
