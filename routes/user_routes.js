@@ -4,11 +4,6 @@ const jwt = require("jsonwebtoken");
 const auth = require("../config/middleware/auth");
 const db = require("../models");
 
-
-router.get("/api", (req, res) => {
-    res.send({ msg: "success" });
-});
-
 // register a new user
 router.post("/register", async (req, res) => {
     try {
@@ -158,24 +153,26 @@ router.patch("/update", (req, res) => {
 });
 
 // User Calendar
-
 router.post("/usercalendar", (req, res) => {
     db.Month.create({
         day: req.body.day,
         month: req.body.month,
         year: req.body.year,
         title: req.body.title,
+        UserId: req.body.UserId
     }).then(() => {
         res.send("Success")
     }).catch(err => res.send(err));
 });
 
-router.get("/usercalendar/:id", (req, res) => {
-    db.Month.findOne({
+router.get("/usercalendar/one/:id", (req, res) => {
+    db.Month.findAll({
         where: {
             UserId: req.params.id
         }
-    }).then(month => res.json(month)).catch(err => res.send(err));
+    }).then(month => {
+        res.json(month)
+    }).catch(err => res.send(err));
 });
 
 

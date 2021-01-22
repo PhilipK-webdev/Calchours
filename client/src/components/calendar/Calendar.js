@@ -5,18 +5,24 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { INITIAL_EVENTS, createEventId } from "./event-utils.js";
-const Calendar = () => {
+import month from "../calendar/utils/month.js"
+const Calendar = (props) => {
     const [weekendsVisible, setWeekendsVisible] = useState(true);
     const [currentEvents, setCurrentEvents] = useState([]);
     const [myTitle, setMyTitle] = useState([]);
     const [count, setCount] = useState(0);
     const history = useHistory();
+
+    let idUser;
     useEffect(() => {
+        idUser = props.userData.user.id;
+        month.getMonth(idUser).then(data => console.log(data)).catch(err => console.log(err));
+        console.log(idUser);
         const token = localStorage.getItem("auth-token");
         if (!token) {
             history.push("/");
         }
-    }, []);
+    }, [props.userData]);
 
     function renderSidebar() {
         return (
