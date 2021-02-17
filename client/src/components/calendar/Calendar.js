@@ -10,14 +10,13 @@ const Calendar = (props) => {
     const [weekendsVisible, setWeekendsVisible] = useState(true);
     const [currentEvents, setCurrentEvents] = useState([]);
     const [myTitle, setMyTitle] = useState([]);
-    const [count, setCount] = useState(0);
     const history = useHistory();
 
     let idUser;
     useEffect(() => {
         idUser = props.userData.user.id;
-        month.getMonth(idUser).then(data => console.log(data)).catch(err => console.log(err));
         console.log(idUser);
+        // month.getMonth("1").then(data => console.log(data)).catch(err => console.log(err));
         const token = localStorage.getItem("auth-token");
         if (!token) {
             history.push("/");
@@ -45,15 +44,23 @@ const Calendar = (props) => {
             </div>
         )
     }
-    let title = "";
-    let tempCount = 0;
+
     const handleDateSelect = (selectInfo) => {
-        myTitle.push(prompt('Please enter a new title for your event'));
-        console.log(myTitle);
-        tempCount = +1;
-        setCount(tempCount);
-        title = myTitle[count];
+        let title = prompt('Please enter a new title for your event');
+        myTitle.push(title);
         let calendarApi = selectInfo.view.calendar;
+        let stringData = calendarApi.currentDataManager.data.currentDate.toString();
+        let arrDate = stringData.split(' ');
+        console.log(arrDate);
+        let obj = {
+            day: arrDate[0],
+            month: arrDate[1],
+            year: arrDate[3],
+            title: title,
+            UserId: "1"
+        }
+        console.log(obj);
+        month.setMonth(obj);
         calendarApi.unselect() // clear date selection
         if (title) {
             calendarApi.addEvent({
@@ -64,10 +71,11 @@ const Calendar = (props) => {
                 allDay: selectInfo.allDay
             });
         }
+
     }
 
     const handleEventClick = (clickInfo) => {
-        clickInfo.event.remove()
+        clickInfo.event.remove();
     }
 
     const handleEvents = (events) => {
@@ -95,7 +103,6 @@ const Calendar = (props) => {
                                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                                 headerToolbar={{
                                     left: 'prev,next today',
-                                    center: 'title',
                                     right: 'dayGridMonth,timeGridWeek,timeGridDay'
                                 }}
                                 initialView='dayGridMonth'
